@@ -54,9 +54,10 @@ body {
     /* border-radius: 30px 30px 0 0; */
 }
 
-.footer p {
-    font-size: 1rem;
+.footer a, .footer h2 {
+    font-size: 1.2rem;
     color: var(--secondary-color);
+    text-decoration: none;
 }
 
 /* Main content */
