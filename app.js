@@ -29,14 +29,16 @@ Book.prototype.createBookCard = function createBookCard () {
 
 // functions
 function addBookToLibrary (book) {
-  myLibrary[book.title] = book
+  // convert book title to lowercase
+  const title = book.title.toLowerCase()
+  myLibrary[title] = book
   render()
 }
 
 function removeBook (e) {
   console.log(e.target)
   const bookCard = e.target.parentElement.parentElement // get parent element
-  const title = bookCard.querySelector('.book-card__title h2').textContent
+  const title = bookCard.querySelector('.book-card__title h2').textContent.toLowerCase()
   delete myLibrary[title]
   render()
 }
@@ -64,6 +66,16 @@ function addBookFromForm (e) {
   const author = document.getElementById('author').value
   const totalPages = document.getElementById('total-pages').value
   const nPagesRead = document.getElementById('pages-read').value || 0
+
+  // make sure the book doesn't already exist and also title, author and totalPages are not empty
+  if (!title || !author || !totalPages) {
+    alert('Please enter all the required fields')
+    return
+  } else if (myLibrary[title]) {
+    alert('This book already exists in your library')
+    return
+  }
+
   const book = new Book(title, author, totalPages, nPagesRead)
   addBookToLibrary(book)
 
@@ -89,7 +101,7 @@ addButton.addEventListener('click', () => {
 
   // if the user clicks on anywhere outside the form, close it
   window.onclick = function (event) {
-    if (event.target == form) {
+    if (event.target === form) {
       form.style.display = 'none'
       addButton.style.display = 'flex'
     }
