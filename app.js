@@ -92,7 +92,7 @@ function addBookFromForm (e) {
   const author = document.getElementById('author').value
   const totalPages = document.getElementById('total-pages').value
   const read = document.getElementById('read-button').value === 'read'
-  const key = title + '_' + author
+  const key = title.toLowerCase() + '_' + author.toLowerCase()
 
   // make sure the book doesn't already exist and also title, author and totalPages are not empty
   if (!title || !author || !totalPages) {
