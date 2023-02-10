@@ -15,47 +15,6 @@
         <h1>Library</h1>
     </div>
     <div class="content">
-        <!-- Create a table with title, author, totalPages, and nPagesRead, add a remove button-->
-        <div class="book-card">
-            <div class="book-card__title">
-                <h2>Harry Potter</h2>
-            </div>
-            <div class="book-card__author">
-                <h3>by J.K. Rowling</h3>
-            </div>
-            <div class="book-card__total-pages">
-                <h4>Pages: 500</h4>
-            </div>
-            <div class="book-card__pages-read">
-                <h4>Pages Read: 100</h4>
-            </div>
-            <div class="book-card__read-status">
-                <h4>Read Status: Read</h4>
-            </div>
-            <div class="remove-button">
-                <button>Remove</button>
-            </div>
-        </div>
-        <div class="book-card">
-            <div class="book-card__title">
-                <h2>Harry Potter</h2>
-            </div>
-            <div class="book-card__author">
-                <h3>by J.K. Rowling</h3>
-            </div>
-            <div class="book-card__total-pages">
-                <h4>Pages: 500</h4>
-            </div>
-            <div class="book-card__pages-read">
-                <h4>Pages Read: 100</h4>
-            </div>
-            <div class="book-card__read-status">
-                <h4>Read Status: Read</h4>
-            </div>
-            <div class="remove-button">
-                <button>Remove</button>
-            </div>
-        </div>
         <div class="book-card" id="add-card-initial">
             <div class="add-card">
                 <button id="add-card-button">Add Book</button>
@@ -63,22 +22,22 @@
             <form id="add-card-form">
                 <div class="add-card__title">
                     <label for="title">Title</label>
-                    <input type="text" name="title" id="title">
+                    <input type="text" name="title" id="title" required placeholder="required">
                 </div>
                 <div class="add-card__author">
                     <label for="author">Author</label>
-                    <input type="text" name="author" id="author">
+                    <input type="text" name="author" id="author" required placeholder="required">
                 </div>
                 <div class="add-card__total-pages">
                     <label for="total-pages">Total Pages</label>
-                    <input type="number" name="total-pages" id="total-pages">
+                    <input type="number" name="total-pages" id="total-pages" required placeholder="required">
                 </div>
                 <div class="add-card__pages-read">
                     <label for="pages-read">Pages Read</label>
                     <input type="number" name="pages-read" id="pages-read">
                 </div>
                 <div class="add-card__submit">
-                    <button type="submit">Submit</button>
+                    <button type="submit" id="submit">Submit</button>
                 </div>
         </div>
     </div>
