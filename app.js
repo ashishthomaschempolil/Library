@@ -20,7 +20,7 @@ Book.prototype.createBookCard = function createBookCard () {
   bookDiv.classList.add('book-card')
   bookDiv.innerHTML = `
       <div class="book-card__title"><h2>${this.title}</h2></div>
-      <div class="book-card__author"><h3>by ${this.author}</h3></div>
+      <div class="book-card__author"><h3>${this.author}</h3></div>
       <div class="book-card__total-pages"><p>Total Pages: ${this.totalPages}</p></div>
       <div class="book-card__buttons">
         <div class="remove-button"><button>Remove</button></div>
@@ -30,19 +30,28 @@ Book.prototype.createBookCard = function createBookCard () {
   return bookDiv
 }
 
+// function to toggle read status
+Book.prototype.toggleRead = function toggleRead () {
+  this.read = !this.read
+}
+
 // functions
 function addBookToLibrary (book) {
   // convert book title to lowercase
   const title = book.title.toLowerCase()
-  myLibrary[title] = book
+  const author = book.author.toLowerCase()
+  const key = title + '_' + author
+  myLibrary[key] = book
   render()
 }
 
 function removeBook (e) {
   console.log(e.target)
-  const bookCard = e.target.parentElement.parentElement // get parent element
+  const bookCard = e.target.parentElement.parentElement.parentElement // get parent element
   const title = bookCard.querySelector('.book-card__title h2').textContent.toLowerCase()
-  delete myLibrary[title]
+  const author = bookCard.querySelector('.book-card__author h3').textContent.toLowerCase()
+  const key = title + '_' + author
+  delete myLibrary[key]
   render()
 }
 
@@ -56,10 +65,24 @@ function render () {
   library.appendChild(addButton)
 
   // add event listeners to remove buttons (the updated ones)
-  const removeButton = document.querySelectorAll('.remove-button')
+  const removeButton = document.querySelectorAll('.remove-button button')
   removeButton.forEach(button => {
     button.addEventListener('click', removeBook)
   })
+
+  // add event listeners to read buttons (the updated ones)
+  const readButton = document.querySelectorAll('.read-button')
+  // whenever there is a change in the checkbox, toggle the read status
+  readButton.forEach(button => {
+    button.addEventListener('change', e => {
+      const bookCard = e.target.parentElement.parentElement.parentElement // get parent element
+      const title = bookCard.querySelector('.book-card__title h2').textContent.toLowerCase()
+      const author = bookCard.querySelector('.book-card__author h3').textContent.toLowerCase()
+      const key = title + '_' + author
+      myLibrary[key].toggleRead()
+    })
+  }
+  )
 }
 
 // add books to library
@@ -69,12 +92,13 @@ function addBookFromForm (e) {
   const author = document.getElementById('author').value
   const totalPages = document.getElementById('total-pages').value
   const read = document.getElementById('read-button').value === 'read'
+  const key = title + '_' + author
 
   // make sure the book doesn't already exist and also title, author and totalPages are not empty
   if (!title || !author || !totalPages) {
     alert('Please enter all the required fields')
     return
-  } else if (myLibrary[title]) {
+  } else if (myLibrary[key]) {
     alert('This book already exists in your library')
     return
   }

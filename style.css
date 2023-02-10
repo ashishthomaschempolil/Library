@@ -64,7 +64,7 @@ body {
 .content {
     grid-area: main;
     display: grid;
-    grid-template-columns: repeat(auto-fit, max(350px));
+    grid-template-columns: repeat(auto-fit, minmax(350px,1fr));
     padding: 2%;
     border-radius: 30px 30px 0 0;
     gap: 50px;
@@ -105,7 +105,7 @@ body {
     font-weight: 400;
 }
 
-.book-card .remove-button {
+.book-card .remove-button button{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -113,9 +113,16 @@ body {
     color: var(--secondary-color);
     border: none;
     border-radius: 30px;
-    padding: 5px 10px;
+    padding: 10px;
     cursor: pointer;
-    width: 50%;
+    /* width: 50%; */
+}
+
+.book-card .remove-button button:hover {
+    background: #dc2626;
+    transition: 0.3s;
+    /* add a light box -shadow */
+    box-shadow: 0 0 2px 2px #ef4444;
 }
 
 .book-card button{
@@ -143,13 +150,6 @@ body {
 
 .book-card__buttons label { 
     font-size: .8rem; 
-}
-
-.book-card .remove-button:hover {
-    background: #dc2626;
-    transition: 0.3s;
-    /* add a light box -shadow */
-    box-shadow: 0 0 2px 2px #ef4444;
 }
 
 #add-card-initial {
