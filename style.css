@@ -129,6 +129,22 @@ body {
     align-self: flex-end;
 }
 
+.book-card__buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 30px;
+}
+
+.book-card__buttons .read-button {
+    display: grid;
+    gap: 3px;
+}
+
+.book-card__buttons label { 
+    font-size: .8rem; 
+}
+
 .book-card .remove-button:hover {
     background: #dc2626;
     transition: 0.3s;
@@ -208,4 +224,6 @@ body {
 #add-card-form {
     display: none;
 }
+
+
 

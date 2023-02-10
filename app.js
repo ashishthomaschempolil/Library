@@ -2,16 +2,16 @@ const myLibrary = {}
 const addButton = document.getElementById('add-card-initial')
 
 // Books
-const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, 295)
-const theLordOfTheRings = new Book('The Lord of the Rings', 'J.R.R. Tolkien', 1216, 1216)
-const theSilmarillion = new Book('The Silmarillion', 'J.R.R. Tolkien', 480, 480)
+const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
+const theLordOfTheRings = new Book('The Lord of the Rings', 'J.R.R. Tolkien', 1216, false)
+const theSilmarillion = new Book('The Silmarillion', 'J.R.R. Tolkien', 480, true)
 
 // Book constructor
-function Book (title, author, totalPages, nPagesRead) {
+function Book (title, author, totalPages, read = false) {
   this.title = title
   this.author = author
   this.totalPages = totalPages
-  this.nPagesRead = nPagesRead
+  this.read = read
 }
 
 // Book prototype methods
@@ -21,8 +21,11 @@ Book.prototype.createBookCard = function createBookCard () {
   bookDiv.innerHTML = `
       <div class="book-card__title"><h2>${this.title}</h2></div>
       <div class="book-card__author"><h3>by ${this.author}</h3></div>
-      <div class="book-card__pages"><p>${this.nPagesRead} / ${this.totalPages} pages read</p></div>
-      <div class="remove-button"><button>Remove</button></div>
+      <div class="book-card__total-pages"><p>Total Pages: ${this.totalPages}</p></div>
+      <div class="book-card__buttons">
+        <div class="remove-button"><button>Remove</button></div>
+        <div class="read-button"><label for="read">Finished Reading?</label><input type="checkbox" name="read" id="read" ${this.read ? 'checked' : ''}></div>
+      </div>
       `
   return bookDiv
 }
@@ -65,7 +68,7 @@ function addBookFromForm (e) {
   const title = document.getElementById('title').value
   const author = document.getElementById('author').value
   const totalPages = document.getElementById('total-pages').value
-  const nPagesRead = document.getElementById('pages-read').value || 0
+  const read = document.getElementById('read-button').value === 'read'
 
   // make sure the book doesn't already exist and also title, author and totalPages are not empty
   if (!title || !author || !totalPages) {
@@ -76,7 +79,7 @@ function addBookFromForm (e) {
     return
   }
 
-  const book = new Book(title, author, totalPages, nPagesRead)
+  const book = new Book(title, author, totalPages, read)
   addBookToLibrary(book)
 
   // reset form
@@ -101,7 +104,7 @@ addButton.addEventListener('click', () => {
 
   // if the user clicks on anywhere outside the form, close it
   window.onclick = function (event) {
-    if (event.target === form) {
+    if (event.target === form || event.target === addButton) {
       form.style.display = 'none'
       addButton.style.display = 'flex'
     }

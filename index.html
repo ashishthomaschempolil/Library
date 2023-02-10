@@ -32,9 +32,13 @@
                     <label for="total-pages">Total Pages</label>
                     <input type="number" name="total-pages" id="total-pages" required placeholder="required">
                 </div>
-                <div class="add-card__pages-read">
-                    <label for="pages-read">Pages Read</label>
-                    <input type="number" name="pages-read" id="pages-read">
+                <div class="add-card__read-button">
+                    <label for="read-button">Read</label>
+                    <!-- dropdown box -->
+                    <select name="read-button" id="read-button">
+                        <option value="not-read">Not Finished Reading</option>
+                        <option value="read">Finished Reading</option>
+                    </select>
                 </div>
                 <div class="add-card__submit">
                     <button type="submit" id="submit">Submit</button>
