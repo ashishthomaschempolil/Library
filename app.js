@@ -1,39 +1,39 @@
 const myLibrary = {}
 const addButton = document.getElementById('add-card-initial')
 
+// Book class
+class Book {
+  constructor (title, author, totalPages, read = false) {
+    this.title = title
+    this.author = author
+    this.totalPages = totalPages
+    this.read = read
+  }
+
+  createBookCard () {
+    const bookDiv = document.createElement('div')
+    bookDiv.classList.add('book-card')
+    bookDiv.innerHTML = `
+        <div class="book-card__title"><h2>${this.title}</h2></div>
+        <div class="book-card__author"><h3>${this.author}</h3></div>
+        <div class="book-card__total-pages"><p>Total Pages: ${this.totalPages}</p></div>
+        <div class="book-card__buttons">
+          <div class="remove-button"><button>Remove</button></div>
+          <div class="read-button"><label for="read">Finished Reading?</label><input type="checkbox" name="read" id="read" ${this.read ? 'checked' : ''}></div>
+        </div>
+        `
+    return bookDiv
+  }
+
+  toggleRead () {
+    this.read = !this.read
+  }
+}
+
 // Books
 const theHobbit = new Book('The Hobbit', 'J.R.R. Tolkien', 295, false)
 const theLordOfTheRings = new Book('The Lord of the Rings', 'J.R.R. Tolkien', 1216, false)
 const theSilmarillion = new Book('The Silmarillion', 'J.R.R. Tolkien', 480, true)
-
-// Book constructor
-function Book (title, author, totalPages, read = false) {
-  this.title = title
-  this.author = author
-  this.totalPages = totalPages
-  this.read = read
-}
-
-// Book prototype methods
-Book.prototype.createBookCard = function createBookCard () {
-  const bookDiv = document.createElement('div')
-  bookDiv.classList.add('book-card')
-  bookDiv.innerHTML = `
-      <div class="book-card__title"><h2>${this.title}</h2></div>
-      <div class="book-card__author"><h3>${this.author}</h3></div>
-      <div class="book-card__total-pages"><p>Total Pages: ${this.totalPages}</p></div>
-      <div class="book-card__buttons">
-        <div class="remove-button"><button>Remove</button></div>
-        <div class="read-button"><label for="read">Finished Reading?</label><input type="checkbox" name="read" id="read" ${this.read ? 'checked' : ''}></div>
-      </div>
-      `
-  return bookDiv
-}
-
-// function to toggle read status
-Book.prototype.toggleRead = function toggleRead () {
-  this.read = !this.read
-}
 
 // functions
 function addBookToLibrary (book) {
